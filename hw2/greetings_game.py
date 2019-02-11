@@ -7,6 +7,7 @@ import random
 
 def get_greeting(name, low=0, high=24):
     rand_num = random.randint(low, high)
+    print(rand_num)
 
     if rand_num >= 6 and rand_num <= 12:
         return f'Good morning, {name}!'

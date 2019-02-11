@@ -5,7 +5,7 @@
 
 def get_divisor():
     num = int(input('Enter an integer number: '))
-    return num, [str(i) for i in range(1, num // 2) if num % i == 0]
+    return num, [str(i) for i in range(1, num // 2 + 1) if num % i == 0]
 
 
 if __name__ == '__main__':
