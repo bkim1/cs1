@@ -59,10 +59,13 @@ class MemoGame():
         print('10 seconds up! Let the round begin!')
 
         # Start of round && user attempts
-        for num in self.curr_nums:
+        for i, num in enumerate(self.curr_nums):
             while mistakes < 2:
                 try:
-                    user_input = int(input('Enter the next number: '))
+                    if i == 0:
+                        user_input = int(input('Enter the first number: '))
+                    else:
+                        user_input = int(input('Enter the next number: '))
                 except ValueError:
                     print('Incorrect!')
                     mistakes += 1
