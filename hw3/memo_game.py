@@ -1,3 +1,8 @@
+# author: Branden Kim
+# assignment: 3
+# description: Program to play the Memorization Game
+
+
 from time import sleep
 from random import randint
 
