@@ -78,30 +78,45 @@ class MemoGame():
                         score += self.__get_points()
                         break
             else:
+                # Too many incorrect answers
                 print(f'Game over! Your points: {score}')
-                break
+                self.__update_score(score)
+
+                user_input = self.__end_of_round()
+                if user_input == 2:
+                    return None
+                
+                return self.__get_menu_input()
         else:
+            # Win condition
             print(f'Congratulations! You win the round. Your points: {score}')
+            self.__update_score(score)
 
-        if score > self.high_score:
-            print('New high score!', end=' ')
-            print(f'Old Score: {self.high_score}, New Score: {score}')
-            self.high_score = score
+            user_input = self.__end_of_round(won=True)
+            if user_input == 1:
+                return self.__start_game()
+            elif user_input == 2:
+                return self.__get_menu_input()
+            else:
+                return None
 
-        user_input = self.__print_end_of_round()
-        if user_input == 2:
-            return None
-        
-        return self.__get_menu_input()
-
-    def __print_end_of_round(self):
+    def __end_of_round(self, won=False):
         while True:
             try:
-                user_input = int(input('Enter 1 to return to the main menu or 2 to exit: '))
+                if won:
+                    user_input = int(input('Enter 1 to play another round, ' + \
+                                           '2 to go back to the main menu ' + \
+                                           'or 3 to exit the game: '))
+                else:
+                    user_input = int(input('Enter 1 to return to the main ' + \
+                                           'menu or 2 to exit: '))
             except ValueError:
                 print('Value must be a number. Please try again.')
             else:
-                if user_input < 1 or user_input > 2:
+                if not won and (user_input < 1 or user_input > 2):
+                    print('Invalid option. Please try again.')
+                    continue
+                elif won and (user_input < 1 or user_input > 3):
                     print('Invalid option. Please try again.')
                     continue
                 return user_input
@@ -121,6 +136,12 @@ class MemoGame():
                     print('Invalid option. Please try again.')
                     continue
                 return user_input
+    
+    def __update_score(self, score):
+        if score > self.high_score:
+            print('New high score!', end=' ')
+            print(f'Old Score: {self.high_score}, New Score: {score}')
+            self.high_score = score
 
     def __generate_list(self):
         min_digits, max_digits = self.__get_word_lengths()
