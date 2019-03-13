@@ -40,6 +40,7 @@ class HangmanModel:
 
     def guess_letter(self, letter):
         if letter in self.guessed:
+            self.incorrect += 1
             return RESULT.GUESSED
         elif letter not in self.letter_positions:
             self.guessed.add(letter)
@@ -108,6 +109,7 @@ class HangmanView:
         print('View: Already Guessed!\n')
         self.info_panel.update_guessed(self.controller.get_used_words())
         self.info_panel.guessed()
+        self.hangman_panel.show_next()
 
     def won(self):
         print('View: Won!\n')
@@ -238,7 +240,7 @@ class InfoPanel:
         self.__clear_entry()
 
     def guessed(self):
-        self.message.config(text='Letter already guessed. Try Again.')
+        self.message.config(text='Letter already guessed. Penalty.')
         self.panel.after(5000, self.__clear_message)
 
     def update_guessed(self, guessed):
