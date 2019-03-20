@@ -119,7 +119,7 @@ class HangmanView:
 
     def lost(self):
         print('View: Lost!\n')
-        self.info_panel.lost()
+        self.info_panel.lost(self.controller.get_secret_word())
         self.hangman_panel.show_next()
 
     def reset_game(self, guessed, current):
@@ -253,8 +253,9 @@ class InfoPanel:
         self.message.config(text='Congratulations! You won!')
         self.__show_reset_button()
 
-    def lost(self):
+    def lost(self, secret):
         self.message.config(text='RIP. You lost!')
+        self.updated_current(list(secret))
         self.__show_reset_button()
 
     def reset_game(self, guessed, current):
@@ -294,6 +295,9 @@ class HangmanController:
 
     def get_current_guess(self):
         return self.model.current
+
+    def get_secret_word(self):
+        return self.model.secret
 
     def make_guess(self, letter):
         cases = {
