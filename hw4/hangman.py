@@ -37,6 +37,7 @@ class HangmanModel:
         self.letter_positions = self.__find_positions(self.secret)
         self.current = ['_' for _ in range(len(self.secret))]
         self.incorrect = 0
+        self.game_over = False
 
     def guess_letter(self, letter):
         if letter in self.guessed:
@@ -47,6 +48,7 @@ class HangmanModel:
             self.incorrect += 1
 
             if self.incorrect == 5:
+                self.game_over = True
                 return RESULT.LOST
             return RESULT.INCORRECT
         else:
@@ -55,6 +57,7 @@ class HangmanModel:
             self.guessed.add(letter)
 
             if '_' not in self.current:
+                self.game_over = True
                 return RESULT.WON
             return RESULT.CORRECT
 
@@ -64,6 +67,7 @@ class HangmanModel:
         self.current = ['_' for _ in range(len(self.secret))]
         self.guessed = set()
         self.incorrect = 0
+        self.game_over = False
         print(f'Model: {self.secret}\n')
         return True
 
@@ -224,6 +228,10 @@ class InfoPanel:
         self.reset.pack_forget()
 
     def on_enter(self, event=None):
+        if self.controller.game_over():
+            self.__clear_entry()
+            return
+
         letter = self.entry.get()
         if len(letter) > 1:
             self.message.config(text='Entered too many characters. Try again.')
@@ -298,6 +306,9 @@ class HangmanController:
 
     def get_secret_word(self):
         return self.model.secret
+
+    def game_over(self):
+        return self.model.game_over
 
     def make_guess(self, letter):
         cases = {
