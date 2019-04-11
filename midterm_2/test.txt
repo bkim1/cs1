@@ -1,0 +1,19 @@
+Bradley Atkinson:Sushi$1
+Gini Carlson:Cafe$1
+Ming Lao Zhang:Ice Cream$2
+Gini Carlson:Dippers$9
+Ming Lao Zhang:Dippers$1
+Emily Sue Lynn Moon:Pizza$2
+Bala Yavatkar:Shakes$1
+Bala Yavatkar:Tacos$2
+Ming Lao Zhang:Shakes$3
+Gini Carlson:Tacos$3
+Bradley Atkinson:Dippers$2
+Emily Sue Lynn Moon:Dippers$1
+Ming Lao Zhang:Pretzels$4
+Bala Yavatkar:Dippers$4
+Emily Sue Lynn Moon:Tacos$5
+Gini Carlson:Pizza$2
+Bala Yavatkar:Pretzels$3
+Emily Sue Lynn Moon:Pretzels$4
+Bala Yavatkar:Pizza$5
