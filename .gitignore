@@ -3,3 +3,6 @@ submissions/
 *.zip
 
 __pycache__
+
+.vscode/
+venv/
